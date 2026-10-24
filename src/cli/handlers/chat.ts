@@ -5,6 +5,7 @@ import type {
   AgentSessionSendResult
 } from '../../shared/agent-session-wire'
 import { AGENT_SESSION_QUEUED_MESSAGES_RUNTIME_CAPABILITY } from '../../shared/agent-session-runtime-capabilities'
+import { AGENT_SESSION_HISTORY_MAX_LIMIT } from '../../shared/agent-session-wire'
 import type { RuntimeWorktreePsResult } from '../../shared/runtime-worktree-contracts'
 import { createStructuredAgentSessionOperationId } from '../../shared/structured-agent-session-mutation'
 import {
@@ -32,7 +33,7 @@ const MAX_READ_LIMIT = 100
 // Why: provider status frames and turn markers share the journal with the conversation, so the
 // read fetches more rows than it shows to return the requested number of readable entries.
 const HISTORY_ROWS_PER_ENTRY = 4
-const MAX_HISTORY_ROWS = 400
+const MAX_HISTORY_ROWS = AGENT_SESSION_HISTORY_MAX_LIMIT
 
 type HistoryResult = { ok: boolean; page: AgentSessionHistoryPage }
 
