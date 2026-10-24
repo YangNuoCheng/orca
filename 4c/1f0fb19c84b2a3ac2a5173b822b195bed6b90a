@@ -1,0 +1,29 @@
+src/renderer/src/components/sidebar/comment-markdown-word-fade.ts
+  s_e77058f499df21::t_f6e0bf8a235178 11-16,41
+src/renderer/src/components/native-chat/NativeChatMarkdown.tsx
+  s_e77058f499df21::t_f6e0bf8a235178 19,118-122
+src/renderer/src/components/native-chat/native-chat-math-markdown.ts
+  s_e77058f499df21::t_f6e0bf8a235178 1-18,21-74
+  s_e77058f499df21::t_9025e1bf601366 19-20
+src/renderer/src/components/native-chat/NativeChatMarkdown.math.test.tsx
+  s_e77058f499df21::t_9adbbb18ad50fb 1-61
+  s_e77058f499df21::t_38d2194cd947fa 62-65
+src/renderer/src/components/sidebar/CommentMarkdown.tsx
+  s_e77058f499df21::t_f6e0bf8a235178 232-233,243-247
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4c1f0fb19c84b2a3ac2a5173b822b195bed6b90a",
+  "prompts": {},
+  "sessions": {
+    "s_e77058f499df21": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16d06-7652-7b40-8b2a-30ca66eb8275",
+        "model": "anthropic/claude-opus-5-5"
+      },
+      "human_author": "dayyang <18801328722@163.com>"
+    }
+  }
+}
