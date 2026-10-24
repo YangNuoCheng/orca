@@ -1,0 +1,22 @@
+src/cli/handlers/chat.test.ts
+  s_c50b310c69318c::t_7cf9662cb22ed2 218-249
+  s_c50b310c69318c::t_0a2cafdf121b9d 250-251
+src/cli/handlers/chat.ts
+  s_c50b310c69318c::t_7cf9662cb22ed2 81-87
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9e66b4bee3c47ade63eb3d5f9cfbfef97e7e23b3",
+  "prompts": {},
+  "sessions": {
+    "s_c50b310c69318c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16e08-900e-7c51-8a90-102edd34d801",
+        "model": "zai/glm-5.3-flash"
+      },
+      "human_author": "dayyang <18801328722@163.com>"
+    }
+  }
+}
