@@ -1,0 +1,23 @@
+skill-guides/orca-cli.md
+  s_e77058f499df21::t_b99990becf8290 29,31
+src/cli/bundled-skill-guides.ts
+  s_e77058f499df21::t_a025dd9c49eff6 27,30
+src/cli/handlers/chat.ts
+  s_e77058f499df21::t_87b95c162a97aa 8,36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9d3381b4cbce25165c20c8aedfc90819ee413392",
+  "prompts": {},
+  "sessions": {
+    "s_e77058f499df21": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16d06-7652-7b40-8b2a-30ca66eb8275",
+        "model": "anthropic/claude-opus-5-5"
+      },
+      "human_author": "dayyang <18801328722@163.com>"
+    }
+  }
+}
