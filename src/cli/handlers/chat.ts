@@ -78,6 +78,13 @@ export const CHAT_HANDLERS: Record<string, CommandHandler> = {
         cursor,
         limit: MAX_HISTORY_ROWS
       })
+      // Why: a stale or ahead cursor returns a reset carrying a fresh tail page; that
+      // page replaces the window instead of extending it, then paging resumes from it.
+      if (!older.result.ok) {
+        page = older.result.page
+        entries = chatTranscript(page.items)
+        continue
+      }
       const olderPage = older.result.page
       // An empty page reports the request cursor back; stop rather than loop on it.
       if (

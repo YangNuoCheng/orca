@@ -215,6 +215,40 @@ describe('chat read', () => {
     })
     expect(result.entries.map((entry: { text: string }) => entry.text)).toEqual(['first', 'second'])
   })
+
+  it('replaces the window with a reset page instead of mixing it into older rows', async () => {
+    const client = fakeClient([
+      historyPage([item({ kind: 'status', text: 'frame' })], 3, {
+        window: { oldest: { epoch: 'e', sequence: 9 } },
+        hasOlder: true
+      }),
+      ok({
+        ok: false,
+        reset: 'journal-truncated',
+        page: {
+          sessionId: SESSION,
+          epoch: 'e2',
+          fence: 4,
+          direction: 'tail',
+          items: [
+            item({ kind: 'message', role: 'user', blocks: [{ type: 'text', text: 'fresh' }] })
+          ],
+          removedItemIds: [],
+          submissions: [],
+          window: { oldest: { epoch: 'e2', sequence: 1 } },
+          hasOlder: false
+        }
+      })
+    ])
+    const result = await run('chat read', { session: SESSION, limit: '2' }, client)
+    expect(client.call).toHaveBeenNthCalledWith(2, 'agentSession.history', {
+      sessionId: SESSION,
+      direction: 'before',
+      cursor: { epoch: 'e', sequence: 9 },
+      limit: 200
+    })
+    expect(result.entries.map((entry: { text: string }) => entry.text)).toEqual(['fresh'])
+  })
 })
 
 describe('chat send', () => {
