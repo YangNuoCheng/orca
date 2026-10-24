@@ -30,7 +30,11 @@ function agentRow(paneKey: string, overrides: Record<string, unknown> = {}) {
   }
 }
 
-function historyPage(items: unknown[], fence: number | undefined = 3) {
+function historyPage(
+  items: unknown[],
+  fence: number | undefined = 3,
+  pageOverrides: Record<string, unknown> = {}
+) {
   return ok({
     ok: true,
     page: {
@@ -40,7 +44,8 @@ function historyPage(items: unknown[], fence: number | undefined = 3) {
       direction: 'tail',
       items,
       removedItemIds: [],
-      submissions: []
+      submissions: [],
+      ...pageOverrides
     }
   })
 }
@@ -184,6 +189,31 @@ describe('chat read', () => {
     ])
     const result = await run('chat read', { session: SESSION, limit: '2' }, client)
     expect(result.entries.map((entry: { text: string }) => entry.text)).toEqual(['second', 'third'])
+  })
+
+  it('pages backward when status frames leave the requested limit unfilled', async () => {
+    const client = fakeClient([
+      historyPage([item({ kind: 'status', text: 'frame' })], 3, {
+        window: { oldest: { epoch: 'e', sequence: 9 } },
+        hasOlder: true
+      }),
+      historyPage(
+        [
+          item({ kind: 'message', role: 'user', blocks: [{ type: 'text', text: 'first' }] }),
+          item({ kind: 'message', role: 'assistant', blocks: [{ type: 'text', text: 'second' }] })
+        ],
+        3,
+        { window: { oldest: { epoch: 'e', sequence: 1 } }, hasOlder: false }
+      )
+    ])
+    const result = await run('chat read', { session: SESSION, limit: '2' }, client)
+    expect(client.call).toHaveBeenNthCalledWith(2, 'agentSession.history', {
+      sessionId: SESSION,
+      direction: 'before',
+      cursor: { epoch: 'e', sequence: 9 },
+      limit: 200
+    })
+    expect(result.entries.map((entry: { text: string }) => entry.text)).toEqual(['first', 'second'])
   })
 })
 
