@@ -1,0 +1,48 @@
+src/cli/root-help-text-primary.ts
+  s_e77058f499df21::t_6f4ebeec3b11a9 90-92
+src/cli/handlers/chat.ts
+  s_e77058f499df21::t_0a21593a8d5d14 19,50,53-56
+  s_e77058f499df21::t_30891fa6983f8c 127-134
+  s_e77058f499df21::t_6f4ebeec3b11a9 1-18,20-49,51-52,57-126
+  s_e77058f499df21::t_603d02a6c23363 135-142
+src/cli/chat-sessions.ts
+  s_e77058f499df21::t_d499ea00914647 1-140
+  s_e77058f499df21::t_8cc61fad48a486 141-144
+  s_e77058f499df21::t_23a7859d4d8f8d 145-147
+src/cli/specs/index.ts
+  s_e77058f499df21::t_6f4ebeec3b11a9 15,46
+src/cli/specs/chat.ts
+  s_e77058f499df21::t_0a21593a8d5d14 23
+  s_e77058f499df21::t_6f4ebeec3b11a9 1-22,24-38
+  s_e77058f499df21::t_140dba63caee08 39-40
+  s_e77058f499df21::t_223c9f38a01ed6 41-42
+docs/site/content/docs/cli/reference.mdx
+  s_e77058f499df21::t_3be523e1a4b011 213-225
+src/cli/handler-group-manifest.ts
+  s_e77058f499df21::t_6f4ebeec3b11a9 214-217
+  s_e77058f499df21::t_edee9dbba1f8b5 213
+skill-guides/orca-cli.md
+  s_e77058f499df21::t_af9da257f78e31 258
+  s_e77058f499df21::t_3be523e1a4b011 61-66,244-257
+src/cli/handlers/chat.test.ts
+  s_e77058f499df21::t_c2050494a7f5a9 1-58,60-127,129-131,133-139,149-198,226
+  s_e77058f499df21::t_0a21593a8d5d14 59,128,132,140-148
+  s_e77058f499df21::t_72fdf7e9c179eb 199-225
+  s_e77058f499df21::t_e712be37d5625e 227-262
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3fb8e9a7b9114f310b52972ec79492c1723fdaf9",
+  "prompts": {},
+  "sessions": {
+    "s_e77058f499df21": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16d06-7652-7b40-8b2a-30ca66eb8275",
+        "model": "anthropic/claude-opus-5-5"
+      },
+      "human_author": "dayyang <18801328722@163.com>"
+    }
+  }
+}
