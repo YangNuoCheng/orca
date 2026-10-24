@@ -58,6 +58,12 @@ Existing-terminal handoff:
 ORCA terminal send --terminal <handle> --text "<task brief>" --enter --json
 ```
 
+Existing-chat handoff, for an agent that runs as a chat (`outcome.kind` `structured`):
+
+```text
+ORCA chat send --session <session> --text "<task brief>" --json
+```
+
 ## Starting agents
 
 `worktree create --agent` (new checkout) and `agent launch` (existing worktree) are how to start an agent. They go through Orca's agent launch, the same one the app's new-agent tab uses: the user's Chat UI setting decides whether the agent opens as a chat or a terminal, and the result reports which (`outcome.kind`) and why (`receipt.detail`). When a chat is not possible, such as for an agent without chat support, the launch starts a terminal and the receipt says so. `--surface chat|terminal` picks one for that launch instead of the setting; pass it only when the user asked for a chat or a terminal. `--surface chat` is refused when Orca can establish before starting anything that the agent cannot open as a chat. If support cannot be checked, the launch can fall back to a terminal. If chat becomes unavailable only after a new workspace is created, Orca keeps that workspace, its setup and default tabs, then opens a terminal; the receipt explains the fallback. `terminal create` makes a terminal for shells and commands.
@@ -234,6 +240,21 @@ Terminal rules:
 - Use `terminal wait --for tui-idle` for agent CLIs such as Claude Code, Gemini, Codex, OMP, Pi, and Grok; always pass `--timeout-ms`.
 - For long output, use cursor reads. After a limited tail preview, page from `oldestCursor`; after a cursor read, continue with `nextCursor` while `limited` is true and `nextCursor !== latestCursor`.
 - `--direction horizontal` splits left/right. `--direction vertical` splits top/bottom.
+
+## Chats
+
+Agents launched as chats are read and messaged with `chat`, not `terminal`. `chat list` names each chat's workspace, agent, state and last reply; `--session` takes the `session` it reports or the `handle` a launch returned.
+
+```text
+ORCA chat list --json
+ORCA chat list --state working --json
+ORCA chat read --session <session> --limit 10 --json
+ORCA chat send --session <session> --text "<message>" --json
+```
+
+- `chat read` returns messages, tool calls, and approvals or questions; `pending: true` marks one waiting for the user.
+- `chat send` sends the text as the user's message. While the agent works, a host with a message queue holds it until the turn ends and reports `delivery: "queued"`.
+- A refused send was not delivered. Read the chat again before resending.
 
 ## Artifacts
 
