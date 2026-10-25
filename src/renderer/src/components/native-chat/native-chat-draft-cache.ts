@@ -65,8 +65,7 @@ export function appendNativeChatDraftCacheManual(scopeKey: string, text: string)
     return
   }
   const previous = readNativeChatDraftCache(scopeKey)
-  const kept = previous.trimEnd()
-  const appended = kept === '' ? text : `${kept}\n\n${text}`
+  const appended = previous === '' ? text : `${previous}\n\n${text}`
   updateNativeChatComposerDraft(scopeKey, { text: appended, document: undefined }, 'immediate')
   appendListeners.get(scopeKey)?.forEach((listener) => listener(text, previous))
 }
