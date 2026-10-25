@@ -91,11 +91,13 @@ describe('NativeChatCodeBlock editing', () => {
 
   it('offers no edit in a dimmed split group', () => {
     render(
-      <NativeChatVisualEditingContext.Provider value={false}>
-        <NativeChatCodeBlock language="text">
-          <code>{'a\n'}</code>
-        </NativeChatCodeBlock>
-      </NativeChatVisualEditingContext.Provider>
+      inChat(
+        <NativeChatVisualEditingContext.Provider value={false}>
+          <NativeChatCodeBlock language="text">
+            <code>{'a\n'}</code>
+          </NativeChatCodeBlock>
+        </NativeChatVisualEditingContext.Provider>
+      )
     )
 
     expect(screen.queryByRole('button', { name: 'Edit' })).toBeNull()
