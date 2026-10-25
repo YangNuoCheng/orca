@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { Pencil, WrapText } from 'lucide-react'
 import { translate } from '@/i18n/i18n'
 import { cn } from '@/lib/utils'
@@ -45,6 +45,13 @@ export function NativeChatCodeBlock({
       ? structuredAgentSessionDraftScopeKey(owner.sessionId)
       : null
   const [editText, setEditText] = useState<string | null>(null)
+  // An explicit exit (Cancel or Escape) removes the focused editor, so the remounted Edit button
+  // takes focus back; a ref flag, not an effect, so initial mounts and blurs never steal focus.
+  const restoreEditFocusRef = useRef(false)
+  const exitEditor = () => {
+    restoreEditFocusRef.current = true
+    setEditText(null)
+  }
   // Keep wrap state in the transcript store so windowing and streaming block recuts cannot reset it; never persist it.
   const { open: wrapped, setOpen: setWrapped } = useNativeChatDisclosure(
     rowKey === undefined || sourceLine === undefined
@@ -55,7 +62,15 @@ export function NativeChatCodeBlock({
   const actions = code ? (
     <>
       {draftScopeKey && editText === null ? (
-        <NativeChatCodeEditButton onEdit={() => setEditText(code)} />
+        <NativeChatCodeEditButton
+          onEdit={() => setEditText(code)}
+          registerRef={(node) => {
+            if (node && restoreEditFocusRef.current) {
+              restoreEditFocusRef.current = false
+              node.focus()
+            }
+          }}
+        />
       ) : null}
       <NativeChatCodeWrapButton wrapped={wrapped} onToggle={() => setWrapped(!wrapped)} />
       <NativeChatCopyButton
@@ -85,7 +100,7 @@ export function NativeChatCodeBlock({
         <NativeChatCodeEditor
           text={editText}
           onChange={setEditText}
-          onCancel={() => setEditText(null)}
+          onCancel={exitEditor}
           onAddToMessage={() => {
             appendNativeChatDraftCacheManual(
               draftScopeKey,
@@ -122,11 +137,18 @@ export function NativeChatCodeBlock({
 }
 
 /** Opens the block for editing in place; the edit then goes into this chat's message. */
-function NativeChatCodeEditButton({ onEdit }: { onEdit: () => void }): React.JSX.Element {
+function NativeChatCodeEditButton({
+  onEdit,
+  registerRef
+}: {
+  onEdit: () => void
+  registerRef: (node: HTMLButtonElement | null) => void
+}): React.JSX.Element {
   const label = translate('components.native-chat.editCode', 'Edit')
   return (
     <button
       type="button"
+      ref={registerRef}
       onClick={onEdit}
       data-native-chat-code-edit=""
       aria-label={label}

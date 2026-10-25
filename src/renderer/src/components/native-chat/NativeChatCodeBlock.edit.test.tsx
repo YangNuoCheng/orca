@@ -70,6 +70,8 @@ describe('NativeChatCodeBlock editing', () => {
 
     expect(readNativeChatDraftCache(SCOPE)).toBe('')
     expect(screen.queryByRole('textbox', { name: 'Edited code' })).toBeNull()
+    // An explicit exit hands the keyboard back to the Edit button.
+    expect(screen.getByRole('button', { name: 'Edit' })).toHaveFocus()
   })
 
   it('offers no edit outside a chat or on a dimmed row', () => {
