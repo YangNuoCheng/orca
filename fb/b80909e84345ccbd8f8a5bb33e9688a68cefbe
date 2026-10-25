@@ -1,0 +1,43 @@
+src/renderer/src/components/native-chat/NativeChatCodeBlock.tsx
+  s_e77058f499df21::t_29d66099b34a49 76-103
+  s_e77058f499df21::t_aa1f1b3e9333dc 1-2,5-6,9-11,17,33-38,49-51
+  s_e77058f499df21::t_6f276cec01f77e 113-170
+src/renderer/src/components/native-chat/NativeChatCodeBlock.edit.test.tsx
+  s_e77058f499df21::t_387782409fb933 1-90
+src/renderer/src/components/native-chat/NativeChatCodeBlock.fixture.tsx
+  s_e77058f499df21::t_25a71aeedb91dc 1-38
+src/renderer/src/components/native-chat/native-chat-code-block-edit.test.ts
+  s_e77058f499df21::t_f5eff07fdb84ec 1-16
+src/renderer/src/components/native-chat/native-chat-code-block-edit.ts
+  s_e77058f499df21::t_72cf9a7c90a829 1-8
+src/renderer/src/i18n/locales/en.json
+  s_e77058f499df21::t_e182415465be80 19588-19591
+src/renderer/src/i18n/locales/es.json
+  s_e77058f499df21::t_9711e9145a2df4 19296-19299
+src/renderer/src/i18n/locales/fr.json
+  s_e77058f499df21::t_2a5927a1420efd 19376-19379
+src/renderer/src/i18n/locales/ja.json
+  s_e77058f499df21::t_ea78ef84d19dca 19266-19269
+src/renderer/src/i18n/locales/ko.json
+  s_e77058f499df21::t_bff350fed71b17 19266-19269
+src/renderer/src/i18n/locales/pt.json
+  s_e77058f499df21::t_facec8bb262148 19810-19813
+src/renderer/src/i18n/locales/zh.json
+  s_e77058f499df21::t_57e06170708f41 19235-19238
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fbb80909e84345ccbd8f8a5bb33e9688a68cefbe",
+  "prompts": {},
+  "sessions": {
+    "s_e77058f499df21": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16d06-7652-7b40-8b2a-30ca66eb8275",
+        "model": "anthropic/claude-opus-5-5"
+      },
+      "human_author": "dayyang <18801328722@163.com>"
+    }
+  }
+}
