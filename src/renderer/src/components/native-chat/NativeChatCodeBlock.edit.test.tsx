@@ -8,7 +8,7 @@ import {
   clearNativeChatComposerDraftsForTests,
   structuredAgentSessionDraftScopeKey
 } from './native-chat-composer-draft-store'
-import { readNativeChatDraftCache } from './native-chat-draft-cache'
+import { readNativeChatDraftCache, writeNativeChatDraftCache } from './native-chat-draft-cache'
 import {
   NativeChatVisualOwnerContext,
   NativeChatVisualEditingContext,
@@ -87,6 +87,39 @@ describe('NativeChatCodeBlock editing', () => {
     )
 
     expect(screen.queryByRole('button', { name: 'Edit' })).toBeNull()
+  })
+
+  it('offers no edit on a user message', () => {
+    render(
+      inChat(
+        <NativeChatCodeBlock language="text" editable={false}>
+          <code>{'a\n'}</code>
+        </NativeChatCodeBlock>
+      )
+    )
+
+    expect(screen.queryByRole('button', { name: 'Edit' })).toBeNull()
+  })
+
+  it('always appends the added block, even over a duplicate or a lone /clear', () => {
+    const fence = '```latex\nWe propose Y.\n```'
+    render(
+      inChat(
+        <NativeChatCodeBlock language="latex">
+          <code>{'We propose Y.\n'}</code>
+        </NativeChatCodeBlock>
+      )
+    )
+
+    writeNativeChatDraftCache(SCOPE, fence)
+    fireEvent.click(screen.getByRole('button', { name: 'Edit' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Add to message' }))
+    expect(readNativeChatDraftCache(SCOPE)).toBe(`${fence}\n\n${fence}`)
+
+    writeNativeChatDraftCache(SCOPE, '/clear')
+    fireEvent.click(screen.getByRole('button', { name: 'Edit' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Add to message' }))
+    expect(readNativeChatDraftCache(SCOPE)).toBe(`/clear\n\n${fence}`)
   })
 
   it('offers no edit in a dimmed split group', () => {

@@ -58,6 +58,19 @@ export function appendNativeChatDraftCache(
   return durable
 }
 
+/** Append a user-initiated block verbatim: always lands, even over a duplicate or a lone /clear.
+ *  No journal, so crash replay of returned text cannot duplicate it. */
+export function appendNativeChatDraftCacheManual(scopeKey: string, text: string): void {
+  if (text === '') {
+    return
+  }
+  const previous = readNativeChatDraftCache(scopeKey)
+  const kept = previous.trimEnd()
+  const appended = kept === '' ? text : `${kept}\n\n${text}`
+  updateNativeChatComposerDraft(scopeKey, { text: appended, document: undefined }, 'immediate')
+  appendListeners.get(scopeKey)?.forEach((listener) => listener(text, previous))
+}
+
 export function subscribeToNativeChatDraftAppend(
   scopeKey: string,
   listener: (text: string, previous: string) => void

@@ -8,7 +8,7 @@ import { getCodeFenceLanguageLabel } from './code-fence-language-label'
 import { NativeChatCopyButton } from './NativeChatCopyButton'
 import { fenceEditedCodeBlock } from './native-chat-code-block-edit'
 import { structuredAgentSessionDraftScopeKey } from './native-chat-composer-draft-store'
-import { appendNativeChatDraftCache } from './native-chat-draft-cache'
+import { appendNativeChatDraftCacheManual } from './native-chat-draft-cache'
 import {
   NativeChatMarkdownRowKeyContext,
   useNativeChatDisclosure
@@ -24,12 +24,15 @@ export function NativeChatCodeBlock({
   children,
   language,
   sourceLine,
-  plain = false
+  plain = false,
+  editable = true
 }: {
   children?: React.ReactNode
   language?: string
   sourceLine?: number
   plain?: boolean
+  /** User messages stay read-only: an edit belongs to what the agent wrote, not what the user sent. */
+  editable?: boolean
 }): React.JSX.Element {
   const code = extractCodeText(children)
   const rowKey = useContext(NativeChatMarkdownRowKeyContext)
@@ -38,7 +41,9 @@ export function NativeChatCodeBlock({
   // Why: an edit goes back through this chat's composer, so only a structured chat's own reply
   // offers it; dimmed panes, dimmed rows, and transcripts without a chat keep a read-only block.
   const draftScopeKey =
-    owner && editingAllowed && !plain ? structuredAgentSessionDraftScopeKey(owner.sessionId) : null
+    owner && editingAllowed && editable && !plain
+      ? structuredAgentSessionDraftScopeKey(owner.sessionId)
+      : null
   const [editText, setEditText] = useState<string | null>(null)
   // Keep wrap state in the transcript store so windowing and streaming block recuts cannot reset it; never persist it.
   const { open: wrapped, setOpen: setWrapped } = useNativeChatDisclosure(
@@ -82,7 +87,10 @@ export function NativeChatCodeBlock({
           onChange={setEditText}
           onCancel={() => setEditText(null)}
           onAddToMessage={() => {
-            appendNativeChatDraftCache(draftScopeKey, fenceEditedCodeBlock(editText, language))
+            appendNativeChatDraftCacheManual(
+              draftScopeKey,
+              fenceEditedCodeBlock(editText, language)
+            )
             setEditText(null)
           }}
         />
