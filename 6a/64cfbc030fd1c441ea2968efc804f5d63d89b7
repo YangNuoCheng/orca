@@ -1,0 +1,19 @@
+src/renderer/src/components/native-chat/NativeChatCodeBlock.edit.test.tsx
+  s_64c7bb170531c6::t_d92324418bc2a1 94-100
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6a64cfbc030fd1c441ea2968efc804f5d63d89b7",
+  "prompts": {},
+  "sessions": {
+    "s_64c7bb170531c6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a173c1-f12a-7432-b85c-e469a47976a2",
+        "model": "zai/glm-5.3-flash"
+      },
+      "human_author": null
+    }
+  }
+}
