@@ -11,6 +11,7 @@ import {
 import { readNativeChatDraftCache } from './native-chat-draft-cache'
 import {
   NativeChatVisualOwnerContext,
+  NativeChatVisualEditingContext,
   type NativeChatVisualOwner
 } from './native-chat-visual-owner'
 
@@ -86,5 +87,34 @@ describe('NativeChatCodeBlock editing', () => {
     )
 
     expect(screen.queryByRole('button', { name: 'Edit' })).toBeNull()
+  })
+
+  it('offers no edit in a dimmed split group', () => {
+    render(
+      <NativeChatVisualEditingContext.Provider value={false}>
+        <NativeChatCodeBlock language="text">
+          <code>{'a\n'}</code>
+        </NativeChatCodeBlock>
+      </NativeChatVisualEditingContext.Provider>
+    )
+
+    expect(screen.queryByRole('button', { name: 'Edit' })).toBeNull()
+  })
+
+  it('closes on Escape wherever the editor focus sits', () => {
+    render(
+      inChat(
+        <NativeChatCodeBlock>
+          <code>{'draft\n'}</code>
+        </NativeChatCodeBlock>
+      )
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: 'Edit' }))
+    screen.getByRole('button', { name: 'Cancel' }).focus()
+    fireEvent.keyDown(screen.getByRole('button', { name: 'Cancel' }), { key: 'Escape' })
+
+    expect(screen.queryByRole('textbox', { name: 'Edited code' })).toBeNull()
+    expect(readNativeChatDraftCache(SCOPE)).toBe('')
   })
 })

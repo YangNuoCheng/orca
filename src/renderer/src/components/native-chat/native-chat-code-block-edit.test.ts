@@ -13,4 +13,8 @@ describe('fenceEditedCodeBlock', () => {
   it('outgrows a fence inside the text', () => {
     expect(fenceEditedCodeBlock('```js\nx\n```', 'md')).toBe('````md\n```js\nx\n```\n````')
   })
+
+  it('drops a language label that holds a backtick', () => {
+    expect(fenceEditedCodeBlock('x', 'js`x')).toBe('```\nx\n```')
+  })
 })

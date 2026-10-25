@@ -14,7 +14,10 @@ import {
   useNativeChatDisclosure
 } from './native-chat-disclosure-store'
 import { NativeChatHighlightedCode } from './NativeChatHighlightedCode'
-import { useNativeChatVisualOwner } from './native-chat-visual-owner'
+import {
+  useNativeChatVisualEditingAllowed,
+  useNativeChatVisualOwner
+} from './native-chat-visual-owner'
 
 /** Code fences need their own copy target rather than the whole chat message. */
 export function NativeChatCodeBlock({
@@ -31,13 +34,13 @@ export function NativeChatCodeBlock({
   const code = extractCodeText(children)
   const rowKey = useContext(NativeChatMarkdownRowKeyContext)
   const owner = useNativeChatVisualOwner()
+  const editingAllowed = useNativeChatVisualEditingAllowed()
   // Why: an edit goes back through this chat's composer, so only a structured chat's own reply
-  // offers it; dimmed rows and transcripts without a chat keep a read-only block.
+  // offers it; dimmed panes, dimmed rows, and transcripts without a chat keep a read-only block.
   const draftScopeKey =
-    owner && !plain ? structuredAgentSessionDraftScopeKey(owner.sessionId) : null
+    owner && editingAllowed && !plain ? structuredAgentSessionDraftScopeKey(owner.sessionId) : null
   const [editText, setEditText] = useState<string | null>(null)
-  // Off until the reader asks; kept in the transcript's store so the row unmounting under
-  // windowing, or a growing reply re-cutting its blocks, does not undo it. Never saved.
+  // Keep wrap state in the transcript store so windowing and streaming block recuts cannot reset it; never persist it.
   const { open: wrapped, setOpen: setWrapped } = useNativeChatDisclosure(
     rowKey === undefined || sourceLine === undefined
       ? undefined
@@ -140,19 +143,21 @@ function NativeChatCodeEditor({
   onCancel: () => void
   onAddToMessage: () => void
 }): React.JSX.Element {
+  // On the container, not just the field: Escape closes the editor wherever its focus sits,
+  // including after tabbing to Cancel or Add to message.
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      event.preventDefault()
+      onCancel()
+    }
+  }
   return (
-    <div className="flex flex-col gap-2 px-2 pb-2">
+    <div className="flex flex-col gap-2 px-2 pb-2" onKeyDown={onKeyDown}>
       <Textarea
         variant="code"
         autoFocus
         value={text}
         onChange={(event) => onChange(event.target.value)}
-        onKeyDown={(event) => {
-          if (event.key === 'Escape') {
-            event.preventDefault()
-            onCancel()
-          }
-        }}
         aria-label={translate('components.native-chat.editCodeField', 'Edited code')}
         className="max-h-96 min-h-0 px-3 py-2 text-chat-code md:text-chat-code [field-sizing:content]"
       />
@@ -168,7 +173,6 @@ function NativeChatCodeEditor({
   )
 }
 
-/** Looks like the Copy button beside it; pressed keeps the hover fill. */
 function NativeChatCodeWrapButton({
   wrapped,
   onToggle
