@@ -1,0 +1,29 @@
+src/renderer/src/components/native-chat/NativeChatUserMessageRow.tsx
+  s_68e7d5bff455dc::t_e58f1eeba0e3fc 126
+src/renderer/src/components/native-chat/native-chat-draft-cache.ts
+  s_68e7d5bff455dc::t_e58f1eeba0e3fc 61-69,71-73
+  s_68e7d5bff455dc::t_685c088bde51cc 70
+src/renderer/src/components/native-chat/NativeChatCodeBlock.tsx
+  s_68e7d5bff455dc::t_c11f78c55e8881 11
+  s_68e7d5bff455dc::t_e58f1eeba0e3fc 27-28,34-35,44-46,90
+  s_68e7d5bff455dc::t_05a0ced2c7323a 91-93
+src/renderer/src/components/native-chat/NativeChatCodeBlock.edit.test.tsx
+  s_68e7d5bff455dc::t_c43983dc16bcde 11,92-123
+  s_68e7d5bff455dc::t_1bbeadfa34c0e4 124
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0a551c9bbf85cac2f00be4ab4bad166e3b5cf547",
+  "prompts": {},
+  "sessions": {
+    "s_68e7d5bff455dc": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a173d4-4027-7681-96d6-c46d8d0f0124",
+        "model": "zai/glm-5.3-flash"
+      },
+      "human_author": null
+    }
+  }
+}
