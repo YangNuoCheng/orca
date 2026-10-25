@@ -1,0 +1,19 @@
+src/renderer/src/components/native-chat/native-chat-draft-cache.ts
+  s_c1434644af6530::t_7d5befcbcf0e53 68
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f36928d33b9187cc62a3f014629c0251187a558e",
+  "prompts": {},
+  "sessions": {
+    "s_c1434644af6530": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a173e6-8bc7-7390-a274-436e73914e0c",
+        "model": "zai/glm-5.3-flash"
+      },
+      "human_author": null
+    }
+  }
+}
