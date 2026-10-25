@@ -1,0 +1,37 @@
+src/renderer/src/components/native-chat/NativeChatCodeBlock.edit.test.tsx
+  s_59cb3d2bf040e1::t_524c487754080e 14,91-119
+src/renderer/src/components/native-chat/NativeChatCodeBlock.tsx
+  s_49844c146d35b4::t_25db62ebed5b9c 17-20,37,39,41,43,146-153,155
+src/renderer/src/components/native-chat/NativeChatView.tsx
+  s_59cb3d2bf040e1::t_4d0c26a2d82391 22
+src/renderer/src/components/native-chat/native-chat-code-block-edit.test.ts
+  s_59cb3d2bf040e1::t_b1619ebfe9d1a2 16-19
+src/renderer/src/components/native-chat/native-chat-code-block-edit.ts
+  s_59cb3d2bf040e1::t_0617c290c550d3 4-9,12-14
+src/renderer/src/components/native-chat/native-chat-visual-owner.tsx
+  s_59cb3d2bf040e1::t_d7413757d6bb45 13-20,30,36,56-58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f1dfc47068cdca42496ba3a580f6ef4d6ca52cd7",
+  "prompts": {},
+  "sessions": {
+    "s_49844c146d35b4": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17341-52f4-7fc0-8282-be77d5c52d36",
+        "model": "zai/glm-5.3-flash"
+      },
+      "human_author": "dayyang <18801328722@163.com>"
+    },
+    "s_59cb3d2bf040e1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17338-0d50-7612-94de-330fbd53ed69",
+        "model": "zai/glm-5.3-flash"
+      },
+      "human_author": "dayyang <18801328722@163.com>"
+    }
+  }
+}
