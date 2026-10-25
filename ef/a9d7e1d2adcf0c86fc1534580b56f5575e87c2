@@ -1,0 +1,22 @@
+src/renderer/src/components/native-chat/native-chat-draft-cache.test.ts
+  s_2bfbc518b12ac5::t_0fcf3aa608e855 4,6-7,43-53
+  s_2bfbc518b12ac5::t_83e32220fa1f93 54
+src/renderer/src/components/native-chat/native-chat-draft-cache.ts
+  s_2bfbc518b12ac5::t_04c4e238ca67c8 15,68-71,73-77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "efa9d7e1d2adcf0c86fc1534580b56f5575e87c2",
+  "prompts": {},
+  "sessions": {
+    "s_2bfbc518b12ac5": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a173f8-dc0a-7da1-88af-ee9e6a4ba378",
+        "model": "zai/glm-5.3-flash"
+      },
+      "human_author": null
+    }
+  }
+}
