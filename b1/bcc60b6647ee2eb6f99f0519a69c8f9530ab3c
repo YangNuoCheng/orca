@@ -1,0 +1,19 @@
+src/renderer/src/components/native-chat/NativeChatCodeBlock.tsx
+  s_59cb3d2bf040e1::t_5df41f179f1c6b 39
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b1bcc60b6647ee2eb6f99f0519a69c8f9530ab3c",
+  "prompts": {},
+  "sessions": {
+    "s_59cb3d2bf040e1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17338-0d50-7612-94de-330fbd53ed69",
+        "model": "zai/glm-5.3-flash"
+      },
+      "human_author": "dayyang <18801328722@163.com>"
+    }
+  }
+}
