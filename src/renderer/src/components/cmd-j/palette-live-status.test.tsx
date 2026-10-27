@@ -20,7 +20,9 @@ import {
 } from './palette-live-status'
 
 vi.mock('@/components/AgentWorkingSpinner', () => ({
-  AgentWorkingSpinner: () => <span data-spinner="true" />
+  AgentWorkingSpinner: ({ tone = 'working' }: { tone?: string }) => (
+    <span data-spinner={tone} />
+  )
 }))
 
 const initialAppState = useAppStore.getInitialState()
@@ -249,10 +251,8 @@ describe('palette live status', () => {
 
     await render()
 
-    expect(testContainer.querySelector('[data-spinner]')).toBeNull()
-    expect(testContainer.querySelector('.lucide-activity')?.classList).toContain(
-      'text-agent-working'
-    )
+    expect(testContainer.querySelector('[data-spinner="working"]')).toBeNull()
+    expect(testContainer.querySelector('[data-spinner="monitoring"]')).not.toBeNull()
     expect(dotLabels()).toEqual(['Monitoring background tasks'])
   })
 
@@ -365,7 +365,7 @@ describe('palette live status', () => {
     expectStyledStatusTooltip('Needs permission')
   })
 
-  it('shows monitoring with a static radio instead of the working spinner', async () => {
+  it('shows monitoring with a blue spinner instead of the working spinner', async () => {
     setAgentState('working', { workingMode: 'monitoring' })
     await act(async () => {
       testRoot.render(
@@ -384,10 +384,8 @@ describe('palette live status', () => {
       )
     })
 
-    expect(testContainer.querySelector('[data-spinner]')).toBeNull()
-    expect(testContainer.querySelector('.lucide-activity')?.classList).toContain(
-      'text-agent-working'
-    )
+    expect(testContainer.querySelector('[data-spinner="working"]')).toBeNull()
+    expect(testContainer.querySelector('[data-spinner="monitoring"]')).not.toBeNull()
     expect(dotLabels()).toEqual(['Monitoring background tasks'])
     expectStyledStatusTooltip('Monitoring background tasks')
   })

@@ -42,10 +42,10 @@ export function AgentWorkingSpinner({
       data-agent-spinner-tone={tone}
       className={cn(
         // Fill the top under reduced motion so the frozen ring looks intentional (#9515).
-        'agent-working-spinner block rounded-full border-2 border-t-transparent',
+        'agent-working-spinner block rounded-full border-2',
         tone === 'monitoring'
-          ? 'border-agent-monitoring motion-reduce:border-t-agent-monitoring'
-          : 'border-agent-working motion-reduce:border-t-agent-working',
+          ? 'border-agent-monitoring border-t-transparent motion-reduce:border-t-agent-monitoring'
+          : 'border-agent-working border-t-transparent motion-reduce:border-t-agent-working',
         className
       )}
     />
