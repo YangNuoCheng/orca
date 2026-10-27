@@ -1,0 +1,21 @@
+resources/native-chat-visuals/.claude-plugin/plugin.json
+  s_e77058f499df21::t_7db527eda096fc 4
+resources/native-chat-visuals/skills/orca-chat-background-work/SKILL.md
+  s_e77058f499df21::t_64aa276e767913 1-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ec765b4563433124ab78389fcf92694ec512a11f",
+  "prompts": {},
+  "sessions": {
+    "s_e77058f499df21": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16d06-7652-7b40-8b2a-30ca66eb8275",
+        "model": "anthropic/claude-opus-5-5"
+      },
+      "human_author": "YangNuoCheng <42427439+YangNuoCheng@users.noreply.github.com>"
+    }
+  }
+}
