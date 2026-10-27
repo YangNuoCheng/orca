@@ -1,0 +1,21 @@
+src/renderer/src/components/cmd-j/palette-live-status.test.tsx
+  s_e77058f499df21::t_4c447cc9e11b4d 23-25,254-255,368,387-388
+src/renderer/src/components/AgentWorkingSpinner.tsx
+  s_e77058f499df21::t_4c447cc9e11b4d 45,47-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8019f8f76cd6a034236174bc925d90c9ecdfb201",
+  "prompts": {},
+  "sessions": {
+    "s_e77058f499df21": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16d06-7652-7b40-8b2a-30ca66eb8275",
+        "model": "anthropic/claude-opus-5-5"
+      },
+      "human_author": "YangNuoCheng <42427439+YangNuoCheng@users.noreply.github.com>"
+    }
+  }
+}
