@@ -1,0 +1,28 @@
+resources/native-chat-visuals/skills/orca-chat-background-work/SKILL.md
+  s_97928025ef6426::t_cd14f0582e8c28 26-28,30,37-39
+  s_565c56477005fc::t_4f1f9b60d54548 40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bb674643d3d9f584ed39e84e5b2bce531ba12a36",
+  "prompts": {},
+  "sessions": {
+    "s_565c56477005fc": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17c38-ab84-71e1-bb99-dcd1ef0dca7b",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "YangNuoCheng <42427439+YangNuoCheng@users.noreply.github.com>"
+    },
+    "s_97928025ef6426": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17c60-86cb-7bb0-b1ed-e36ac7fafaf2",
+        "model": "zai/glm-5.3-flash"
+      },
+      "human_author": "YangNuoCheng <42427439+YangNuoCheng@users.noreply.github.com>"
+    }
+  }
+}
