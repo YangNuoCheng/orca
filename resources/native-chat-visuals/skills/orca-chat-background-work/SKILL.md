@@ -23,14 +23,20 @@ Orca shows a chat as monitoring, and lists its background work under the chat, w
 
   # on a server: keep the watcher local so an ssh drop does not end it.
   # Loop until a successful check (exit 0) reports the pid gone; an ssh
-  # failure is retried, not treated as the work ending.
+  # failure is retried, not treated as the work ending. Use ps, not
+  # kill -0: ps reports existence without needing signal permission,
+  # so an owned-but-unsignalled pid is not mistaken for gone.
   while :; do
-    state=$(ssh -o ServerAliveInterval=30 HOST 'kill -0 PID 2>/dev/null && echo alive || echo gone') \
+    state=$(ssh -o ServerAliveInterval=30 HOST 'ps -p PID >/dev/null 2>&1 && echo alive || echo gone') \
       && [ "$state" = gone ] && break
     sleep 30
   done
   ssh HOST 'tail -n 20 LOG'
   ```
+
+  The remote loop is POSIX shell syntax and must run from a POSIX shell
+  (Git Bash or WSL on Windows); PowerShell cannot execute it. The remote
+  commands assume a POSIX server (ps, kill, tail).
 
   Use the process id of the work itself, not of a launcher that has already exited. Print it from the command that starts the work (`... & echo $!`). `pgrep -f` run through `ssh` can match the remote shell running that same `pgrep`, so if you search for the id, exclude your own command, and check that the watcher does not exit at once.
 
