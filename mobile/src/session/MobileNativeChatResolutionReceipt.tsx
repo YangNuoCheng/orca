@@ -8,11 +8,10 @@ import {
 } from '../../../src/shared/native-chat-resolution-receipt'
 import { INLINE_TEXT_SELECTION } from '../components/inline-text-selection'
 import { colors, spacing, typography } from '../theme/mobile-theme'
-import { MobileNativeChatAwaitingInputRow } from './MobileNativeChatAwaitingInputRow'
-import { scaledType } from './mobile-native-chat-message-styles'
-import { MobileNativeChatMessageTime } from './MobileNativeChatMessageTime'
+import { MobileNativeChatAwaitingInputRow } from './native-chat/transcript/MobileNativeChatAwaitingInputRow'
+import { scaledType } from './native-chat/transcript/mobile-native-chat-message-styles'
+import { MobileNativeChatMessageTime } from './native-chat/transcript/MobileNativeChatMessageTime'
 
-/** Desktop parity: `NativeChatResolutionReceipt`. */
 export function MobileNativeChatResolutionReceipt({
   body,
   awaiting = true,
@@ -55,7 +54,6 @@ export function MobileNativeChatResolutionReceipt({
           subject={subject}
           pending={false}
           fontScale={fontScale}
-          // An answered group already shows each question above its answer.
           listsQuestions={answers.length === 0}
         />
       ) : (
