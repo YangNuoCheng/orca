@@ -1,5 +1,5 @@
 import React from 'react'
-import { Activity, CircleCheck, CircleDashed } from 'lucide-react'
+import { CircleCheck, CircleDashed } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { AgentQuestionIcon } from '@/components/AgentQuestionIcon'
 import { AgentWorkingSpinner } from '@/components/AgentWorkingSpinner'
@@ -139,7 +139,7 @@ export const AgentStateDot = React.memo(function AgentStateDot({
         className={cn('inline-flex shrink-0 items-center justify-center', box, className)}
         aria-label={agentStateLabel(state)}
       >
-        <Activity className={cn('text-agent-working', icon)} aria-hidden="true" />
+        <AgentWorkingSpinner tone="monitoring" className={inner} />
       </span>
     )
   } else if (state === 'done') {

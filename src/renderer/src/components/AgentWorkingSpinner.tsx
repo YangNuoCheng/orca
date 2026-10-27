@@ -27,14 +27,25 @@ function handleSpinnerAnimationStart(event: React.AnimationEvent<HTMLSpanElement
 }
 
 // CSS compositor rotation avoids JS input-thread work; callers provide size.
-export function AgentWorkingSpinner({ className }: { className?: string }): React.JSX.Element {
+export function AgentWorkingSpinner({
+  className,
+  tone = 'working'
+}: {
+  className?: string
+  // Monitoring spins blue: the agent is idle but still tracking work it started.
+  tone?: 'working' | 'monitoring'
+}): React.JSX.Element {
   return (
     <span
       onAnimationStart={handleSpinnerAnimationStart}
       data-agent-spinner=""
+      data-agent-spinner-tone={tone}
       className={cn(
         // Fill the top under reduced motion so the frozen ring looks intentional (#9515).
-        'agent-working-spinner block rounded-full border-2 border-agent-working border-t-transparent motion-reduce:border-t-agent-working',
+        'agent-working-spinner block rounded-full border-2 border-t-transparent',
+        tone === 'monitoring'
+          ? 'border-agent-monitoring motion-reduce:border-t-agent-monitoring'
+          : 'border-agent-working motion-reduce:border-t-agent-working',
         className
       )}
     />

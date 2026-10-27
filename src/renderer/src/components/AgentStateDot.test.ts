@@ -39,13 +39,13 @@ describe('AgentStateDot', () => {
     expect(markup).toContain('data-agent-spinner')
   })
 
-  it('renders monitoring as a static yellow heartbeat glyph', () => {
+  it('renders monitoring as a blue spinner', () => {
     const markup = renderMarkup('monitoring')
 
     expect(markup).toContain('aria-label="Monitoring background tasks"')
-    expect(markup).toContain('lucide-activity')
-    expect(markup).toContain('text-agent-working')
-    expect(markup).not.toContain('data-agent-spinner')
+    expect(markup).toContain('data-agent-spinner-tone="monitoring"')
+    expect(markup).toContain('border-agent-monitoring')
+    expect(markup).not.toContain('border-agent-working')
   })
 
   it('renders done as an emerald check icon', () => {

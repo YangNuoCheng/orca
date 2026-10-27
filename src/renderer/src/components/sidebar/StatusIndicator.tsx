@@ -1,5 +1,4 @@
 import React from 'react'
-import { Activity } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { AgentQuestionIcon } from '@/components/AgentQuestionIcon'
 import { AgentStateDot } from '@/components/AgentStateDot'
@@ -54,7 +53,7 @@ const StatusIndicator = React.memo(function StatusIndicator({
         className={cn('inline-flex h-3 w-3 shrink-0 items-center justify-center', className)}
         {...rest}
       >
-        <Activity className="size-3 text-agent-working" aria-hidden="true" />
+        <AgentWorkingSpinner tone="monitoring" className="size-2" />
       </span>
     )
   } else if (status === 'failed') {

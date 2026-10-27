@@ -392,7 +392,7 @@ describe('DashboardAgentRow', () => {
     expect(markup).toContain('data-agent-spinner')
   })
 
-  it('renders monitoring without a spinner or active tool line', () => {
+  it('renders monitoring as a blue spinner without an active tool line', () => {
     const markup = renderRow(
       makeAgent(
         {},
@@ -406,9 +406,9 @@ describe('DashboardAgentRow', () => {
     )
 
     expect(markup).toContain('Monitoring background tasks')
-    expect(markup).toContain('lucide-activity')
-    expect(classTokens(markup)).toContain('text-agent-working')
-    expect(markup).not.toContain('data-agent-spinner')
+    expect(markup).toContain('data-agent-spinner-tone="monitoring"')
+    expect(classTokens(markup)).toContain('border-agent-monitoring')
+    expect(classTokens(markup)).not.toContain('border-agent-working')
     expect(markup).not.toContain('data-agent-row-tool-slot')
   })
 

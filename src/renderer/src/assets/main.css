@@ -91,6 +91,7 @@
   --color-editor-surface: var(--editor-surface);
   --color-agent-question: var(--agent-question);
   --color-agent-working: var(--agent-working);
+  --color-agent-monitoring: var(--agent-monitoring);
   --color-agent-question-text: var(--agent-question-text);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -226,8 +227,10 @@
   --ai-action-accent: var(--color-violet-500);
   /* Use one question hue across surfaces, distinct from working-yellow. */
   --agent-question: var(--color-orange-600);
-  /* The working-state yellow every agent working/monitoring glyph paints. */
+  /* The working-state yellow every agent working glyph paints. */
   --agent-working: var(--color-yellow-500);
+  /* Blue marks a chat whose turn ended while its background commands still run. */
+  --agent-monitoring: var(--color-blue-500);
   /* Legible weight for text/glyphs on a tinted --agent-question surface. */
   --agent-question-text: var(--color-orange-700);
   /* Keep PR-state hues stable across theme changes. */
