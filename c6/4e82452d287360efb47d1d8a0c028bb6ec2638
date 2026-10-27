@@ -1,0 +1,23 @@
+src/shared/orcad-artifacts.ts
+  s_fbdd7ed0f07124::t_82eb27d30078e9 172-173
+src/main/native-chat/native-chat-visuals-delivery.test.ts
+  s_fbdd7ed0f07124::t_82eb27d30078e9 177-178
+resources/native-chat-visuals/skills/orca-chat-background-work/SKILL.md
+  s_fbdd7ed0f07124::t_82eb27d30078e9 17,20-32,42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c64e82452d287360efb47d1d8a0c028bb6ec2638",
+  "prompts": {},
+  "sessions": {
+    "s_fbdd7ed0f07124": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17c4e-5666-76c2-a4ae-d6dac9fa04fd",
+        "model": "zai/glm-5.3-flash"
+      },
+      "human_author": "YangNuoCheng <42427439+YangNuoCheng@users.noreply.github.com>"
+    }
+  }
+}
