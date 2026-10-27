@@ -1,0 +1,29 @@
+src/renderer/src/assets/main.css
+  s_e77058f499df21::t_0e90ed7b6264ca 94,230,232-233
+src/renderer/src/components/AgentWorkingSpinner.tsx
+  s_e77058f499df21::t_0e90ed7b6264ca 30-37,42,45-48
+src/renderer/src/components/sidebar/StatusIndicator.tsx
+  s_e77058f499df21::t_0e90ed7b6264ca 56
+src/renderer/src/components/dashboard/DashboardAgentRow.test.tsx
+  s_e77058f499df21::t_a22048536f9237 395,409-411
+src/renderer/src/components/AgentStateDot.test.ts
+  s_e77058f499df21::t_0e90ed7b6264ca 42,46-48
+src/renderer/src/components/AgentStateDot.tsx
+  s_e77058f499df21::t_0e90ed7b6264ca 2,142
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2a607a334867c8e4800182adba1b93fa394d05a8",
+  "prompts": {},
+  "sessions": {
+    "s_e77058f499df21": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16d06-7652-7b40-8b2a-30ca66eb8275",
+        "model": "anthropic/claude-opus-5-5"
+      },
+      "human_author": "YangNuoCheng <42427439+YangNuoCheng@users.noreply.github.com>"
+    }
+  }
+}
