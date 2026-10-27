@@ -1,0 +1,19 @@
+src/renderer/src/components/sidebar/__snapshots__/subagent-child-row-fallback-pixels.test.tsx.snap
+  s_e77058f499df21::t_6129d4ca3e3f28 3,5,19-21,31-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4a1bd45ebad338af07e895a30740e329c95231ed",
+  "prompts": {},
+  "sessions": {
+    "s_e77058f499df21": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a16d06-7652-7b40-8b2a-30ca66eb8275",
+        "model": "anthropic/claude-opus-5-5"
+      },
+      "human_author": "YangNuoCheng <42427439+YangNuoCheng@users.noreply.github.com>"
+    }
+  }
+}
