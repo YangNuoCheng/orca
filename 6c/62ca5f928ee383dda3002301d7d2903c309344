@@ -1,0 +1,61 @@
+src/main/persistence/applying-settings/onboarding-normalization.ts
+  s_2beda99a75f13b::t_e4ebb83209a7b0 66-67
+src/renderer/src/attention/hidden-workspace-notification-mute.test.ts
+  s_2beda99a75f13b::t_094a961ad77cb6 55-103
+src/shared/notification-settings-types.ts
+  s_2beda99a75f13b::t_e4ebb83209a7b0 29-30
+src/renderer/src/components/settings/NotificationsPane.hidden-workspaces.test.tsx
+  s_2beda99a75f13b::t_094a961ad77cb6 43-57
+src/main/runtime/workspace-notification-mute.test.ts
+  s_2beda99a75f13b::t_094a961ad77cb6 6,49,62,210-266
+  s_bc455a1f22bc56::t_14df75f81cb3ac 267
+src/shared/notification-settings-defaults.ts
+  s_2beda99a75f13b::t_e4ebb83209a7b0 13-14
+src/renderer/src/components/settings/NotificationsPane.tsx
+  s_2beda99a75f13b::t_e4ebb83209a7b0 203-220
+src/shared/workspace-notification-lineage.ts
+  s_2beda99a75f13b::t_e4ebb83209a7b0 1-31
+src/main/runtime/workspace-notification-mute.ts
+  s_2beda99a75f13b::t_e4ebb83209a7b0 17,22-27,38-48,50
+src/renderer/src/components/settings/notifications-search.ts
+  s_2beda99a75f13b::t_e4ebb83209a7b0 101-118
+  s_58a24a5c86f1ec::t_8f88fd9d31c3fb 99-100
+src/renderer/src/attention/hidden-workspace-notification-mute.ts
+  s_2beda99a75f13b::t_e4ebb83209a7b0 10,18-27
+src/renderer/src/i18n/locales/en.json
+  s_2beda99a75f13b::t_27816436698d88 8539-8540
+src/renderer/src/i18n/locales/zh.json
+  s_2beda99a75f13b::t_8fd4e5578c26de 8042-8043
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6c62ca5f928ee383dda3002301d7d2903c309344",
+  "prompts": {},
+  "sessions": {
+    "s_2beda99a75f13b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a18771-e077-7022-bbba-e6a3dba4ead6",
+        "model": "group/gpt"
+      },
+      "human_author": "YangNuoCheng <42427439+YangNuoCheng@users.noreply.github.com>"
+    },
+    "s_58a24a5c86f1ec": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a18542-62bb-7a02-a406-3aadb384650f",
+        "model": "group/opus"
+      },
+      "human_author": "YangNuoCheng <42427439+YangNuoCheng@users.noreply.github.com>"
+    },
+    "s_bc455a1f22bc56": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1015fa5a-ea68-4107-89b8-d77c5d6bcdc5",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "YangNuoCheng <42427439+YangNuoCheng@users.noreply.github.com>"
+    }
+  }
+}
