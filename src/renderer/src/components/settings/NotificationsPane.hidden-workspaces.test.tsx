@@ -40,6 +40,21 @@ function renderPane(enabled = true) {
 }
 
 describe('NotificationsPane hidden workspaces row', () => {
+  it('can silence child workspaces while the desktop notification master switch is off', () => {
+    const { updateSettings, view } = renderPane(false)
+    const toggle = view.getByRole('switch', { name: 'Notify about child workspaces' })
+    expect(toggle.getAttribute('aria-checked')).toBe('true')
+    expect(toggle.hasAttribute('disabled')).toBe(false)
+    fireEvent.click(toggle)
+    expect(updateSettings).toHaveBeenCalledWith({
+      notifications: expect.objectContaining({
+        notifyChildWorkspaces: false,
+        notifyHiddenWorkspaces: false,
+        enabled: false
+      })
+    })
+  })
+
   it('renders, defaults off, and turns the setting on', () => {
     const { updateSettings, toggle, view } = renderPane()
     expect(view.getByText(LABEL)).toBeTruthy()

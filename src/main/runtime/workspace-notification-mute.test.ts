@@ -3,7 +3,7 @@ import type { NotificationSettings } from '../../shared/notification-settings-ty
 import type { PersistedState } from '../../shared/persisted-state-types'
 import type { Worktree } from '../../shared/worktree/types'
 import type { WorktreeMeta } from '../../shared/worktree/meta-types'
-import type { WorktreeLineage } from '../../shared/worktree/lineage-types'
+import type { WorkspaceLineage, WorktreeLineage } from '../../shared/worktree/lineage-types'
 import type { FolderWorkspace } from '../../shared/folder-workspace-types'
 import { getDefaultNotificationSettings } from '../../shared/notification-settings-defaults'
 import { normalizeNotificationSettings } from '../persistence/applying-settings/onboarding-normalization'
@@ -46,6 +46,7 @@ function deps(options: {
   metaById?: Record<string, Partial<WorktreeMeta>>
   folders?: FolderWorkspace[]
   lineage?: Record<string, Pick<WorktreeLineage, 'worktreeId' | 'parentWorktreeId'>>
+  workspaceLineage?: Record<string, WorkspaceLineage>
   notifications?: NotificationSettings
 }): WorkspaceNotificationMuteDeps {
   return {
@@ -58,6 +59,7 @@ function deps(options: {
       getWorktreeMeta: (id) => (options.metaById?.[id] ?? options.meta) as WorktreeMeta | undefined,
       // oxlint-disable-next-line typescript/consistent-type-assertions -- SAFETY: the check reads only worktreeId and parentWorktreeId.
       getAllWorktreeLineage: () => (options.lineage ?? {}) as Record<string, WorktreeLineage>,
+      getAllWorkspaceLineage: () => options.workspaceLineage ?? {},
       getFolderWorkspaces: () => options.folders ?? []
     },
     resolvedWorktrees: options.resolved === undefined ? [listed()] : options.resolved
@@ -203,6 +205,64 @@ describe('isWorkspaceNotificationMuted', () => {
   const notify = (notifyHiddenWorkspaces: boolean) => ({
     ...getDefaultNotificationSettings(),
     notifyHiddenWorkspaces
+  })
+
+  it('silences visible children independently of hidden-workspace and CLI filters', () => {
+    const notifications = {
+      ...getDefaultNotificationSettings(),
+      notifyHiddenWorkspaces: true,
+      notifyChildWorkspaces: false
+    }
+    const lineage = {
+      [SCOPE]: { worktreeId: SCOPE, parentWorktreeId: 'repo-1::/work/parent' },
+      'repo-1::/work/nested': { worktreeId: 'repo-1::/work/nested', parentWorktreeId: SCOPE }
+    }
+    const context = deps({ notifications, lineage })
+    expect(isWorkspaceNotificationMuted(context, SCOPE)).toBe(true)
+    expect(isWorkspaceNotificationMuted(context, 'repo-1::/work/nested')).toBe(true)
+    expect(isWorkspaceNotificationMuted(context, 'repo-1::/work/parent')).toBe(false)
+    expect(isWorkspaceHiddenBySidebarFilters(context, SCOPE)).toBe(false)
+    expect(
+      isWorkspaceNotificationMuted(
+        deps({ notifications: { ...notifications, notifyChildWorkspaces: true }, lineage }),
+        SCOPE
+      )
+    ).toBe(false)
+  })
+
+  it('recognizes a folder parent and a folder child through workspace lineage', () => {
+    const lineage: WorkspaceLineage = {
+      childWorkspaceKey: 'worktree:repo-1::/work/feature',
+      parentWorkspaceKey: 'folder:manager',
+      origin: 'cli',
+      capture: { source: 'explicit-cli-flag', confidence: 'explicit' },
+      createdAt: 1
+    }
+    const folderChild: WorkspaceLineage = {
+      ...lineage,
+      childWorkspaceKey: 'folder:child'
+    }
+    const context = deps({
+      notifications: { ...getDefaultNotificationSettings(), notifyChildWorkspaces: false },
+      workspaceLineage: {
+        [lineage.childWorkspaceKey]: lineage,
+        [folderChild.childWorkspaceKey]: folderChild
+      }
+    })
+    expect(isWorkspaceNotificationMuted(context, SCOPE)).toBe(true)
+    expect(isWorkspaceNotificationMuted(context, 'folder:child')).toBe(true)
+    expect(isWorkspaceNotificationMuted(context, 'folder:manager')).toBe(false)
+  })
+
+  it('preserves child notifications for older settings and sanitizes the new preference', () => {
+    const lineage = { [SCOPE]: { worktreeId: SCOPE, parentWorktreeId: 'repo-1::/work/parent' } }
+    for (const value of [undefined, { notifyChildWorkspaces: 'false' }]) {
+      const notifications = normalizeNotificationSettings(value)
+      expect(notifications.notifyChildWorkspaces).toBe(true)
+      expect(isWorkspaceNotificationMuted(deps({ notifications, lineage }), SCOPE)).toBe(false)
+    }
+    const notifications = normalizeNotificationSettings({ notifyChildWorkspaces: false })
+    expect(isWorkspaceNotificationMuted(deps({ notifications, lineage }), SCOPE)).toBe(true)
   })
 
   it('mutes a hidden workspace only while "Notify About Hidden Workspaces" is off', () => {

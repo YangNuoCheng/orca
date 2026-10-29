@@ -26,6 +26,8 @@ export type NotificationSettings = {
   mutedNotificationSourceIds: NotificationSourceId[]
   /** Off silences every notification from a workspace the sidebar's Filters switches hide. Local only. */
   notifyHiddenWorkspaces: boolean
+  /** Off silences child workspaces without hiding their sidebar rows. Older profiles notify. */
+  notifyChildWorkspaces?: boolean
 }
 
 export type NotificationEventSource = 'agent-task-complete' | 'terminal-bell' | 'test'

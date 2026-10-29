@@ -98,6 +98,26 @@ export const getNotificationsPaneSearchEntries = createLocalizedCatalog(() => [
   },
   {
     title: translate(
+      'auto.components.settings.NotificationsPane.notifyChildWorkspaces',
+      'Notify about child workspaces'
+    ),
+    description: translate(
+      'auto.components.settings.NotificationsPane.notifyChildWorkspacesDescription',
+      'When off, workspaces with a recorded parent show no unread dot and send no notifications to this computer or your phone. Child workspaces remain visible.'
+    ),
+    keywords: [
+      ...translateSearchKeyword(
+        'auto.components.settings.notifications.search.ca8faa40d7',
+        'notifications'
+      ),
+      ...translateSearchKeyword('auto.components.settings.notifications.search.mute', 'mute'),
+      'child',
+      'parent',
+      'subagent'
+    ]
+  },
+  {
+    title: translate(
       'auto.components.settings.notifications.search.96562a72c6',
       'Suppress While Focused'
     ),

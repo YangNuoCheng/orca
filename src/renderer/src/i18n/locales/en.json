@@ -8536,6 +8536,8 @@
           "d4f2b65f30": "Show the Orca Mobile shortcut in the sidebar."
         },
         "NotificationsPane": {
+          "notifyChildWorkspaces": "Notify about child workspaces",
+          "notifyChildWorkspacesDescription": "When off, workspaces with a recorded parent show no unread dot and send no notifications to this computer or your phone. Child workspaces remain visible.",
           "906b4afebf": "Send Test Notification",
           "2772d2f257": "Skip notifications when the triggering worktree is already visible.",
           "00cd406dbb": "Suppress While Focused",

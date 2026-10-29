@@ -7,6 +7,7 @@ import { computeVisibleWorktreeIds } from '@/components/sidebar/compute-visible-
 import { buildVisibleWorktreeOptionsFromState } from '@/components/sidebar/visible-worktree-options-from-state'
 import { isFolderWorkspaceFromOtherDevice } from '../../../shared/workspace-creator-visibility'
 import { selectFolderWorkspaces, selectWorktreesByRepo } from '@/store/workspace-record-selectors'
+import { hasWorkspaceNotificationParent } from '../../../shared/workspace-notification-lineage'
 
 /** Apply sidebar kind filters with project/host filters lifted so lineage and host twins follow sidebar visibility. Muting suppresses unread/banner/sound/push.
  * Fail open until settings/UI and terminal reconnect hydrate, or when the workspace is unknown; restored rows otherwise look asleep. */
@@ -14,6 +15,16 @@ export function isWorkspaceNotificationMutedBySidebarFilters(
   state: AppState,
   workspaceId: string
 ): boolean {
+  if (
+    state.settings?.notifications?.notifyChildWorkspaces === false &&
+    hasWorkspaceNotificationParent(
+      workspaceId,
+      state.worktreeLineageById,
+      state.workspaceLineageByChildKey
+    )
+  ) {
+    return true
+  }
   if (
     state.settings?.notifications?.notifyHiddenWorkspaces !== false ||
     !state.persistedUIReady ||

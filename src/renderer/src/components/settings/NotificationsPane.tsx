@@ -200,6 +200,24 @@ export function NotificationsPane({
         }
       />
 
+      <NotificationSettingToggle
+        icon={<Bot className="size-4" />}
+        label={translate(
+          'auto.components.settings.NotificationsPane.notifyChildWorkspaces',
+          'Notify about child workspaces'
+        )}
+        description={translate(
+          'auto.components.settings.NotificationsPane.notifyChildWorkspacesDescription',
+          'When off, workspaces with a recorded parent show no unread dot and send no notifications to this computer or your phone. Child workspaces remain visible.'
+        )}
+        checked={notificationSettings.notifyChildWorkspaces !== false}
+        onToggle={() =>
+          void updateNotificationSettings({
+            notifyChildWorkspaces: notificationSettings.notifyChildWorkspaces === false
+          })
+        }
+      />
+
       <Separator />
 
       <NotificationSoundSection

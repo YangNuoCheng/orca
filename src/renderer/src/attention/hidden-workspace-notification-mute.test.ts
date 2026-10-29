@@ -52,6 +52,55 @@ beforeEach(() => {
 })
 
 describe('isWorkspaceNotificationMutedBySidebarFilters', () => {
+  it('silences a visible child in both attention surfaces while retaining its top-level parent', () => {
+    const settings = store.getState().settings!
+    store.setState({
+      hideCliCreatedWorkspaces: false,
+      settings: {
+        ...settings,
+        notifications: {
+          ...settings.notifications,
+          notifyHiddenWorkspaces: true,
+          notifyChildWorkspaces: false
+        }
+      },
+      worktreeLineageById: {
+        [PLAIN_ID]: {
+          worktreeId: PLAIN_ID,
+          worktreeInstanceId: 'plain',
+          parentWorktreeId: CLI_ID,
+          parentWorktreeInstanceId: 'cli',
+          origin: 'cli',
+          capture: { source: 'terminal-context', confidence: 'inferred' },
+          createdAt: 1
+        }
+      }
+    })
+    expect(muted(PLAIN_ID)).toBe(true)
+    expect(muted(CLI_ID)).toBe(false)
+    expect(createTerminalAttentionSurface(store.getState()).isWorkspaceMuted(PLAIN_ID)).toBe(true)
+    expect(createStructuredAttentionSurface(store.getState()).isWorkspaceMuted(PLAIN_ID)).toBe(true)
+    expect(
+      resolveAgentAttention(
+        {
+          subject: { workspaceId: PLAIN_ID, surfaceKey: 'tab-1:leaf-1' },
+          reason: 'agent-completion',
+          settlesTurn: true,
+          hasFreshActivityEvidence: true
+        },
+        createTerminalAttentionSurface(store.getState())
+      )
+    ).toEqual({ admitted: false, cause: 'muted-workspace' })
+    expect(store.getState().worktreesByRepo.repo1).toHaveLength(2)
+    store.setState({
+      settings: {
+        ...settings,
+        notifications: { ...settings.notifications, notifyChildWorkspaces: true }
+      }
+    })
+    expect(muted(PLAIN_ID)).toBe(false)
+  })
+
   it('mutes a workspace a Filters switch hides while the setting is off', () => {
     expect(muted(CLI_ID)).toBe(true)
     expect(muted(PLAIN_ID)).toBe(false)

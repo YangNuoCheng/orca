@@ -8039,6 +8039,8 @@
           "androidApkLabel": "Android APK"
         },
         "NotificationsPane": {
+          "notifyChildWorkspaces": "通知子工作区",
+          "notifyChildWorkspacesDescription": "关闭后，有父工作区的子工作区不显示未读点，也不向这台电脑或手机发送通知。子工作区仍然可见。",
           "906b4afebf": "发送测试通知",
           "2772d2f257": "当触发工作树已经可见时跳过通知。",
           "00cd406dbb": "专注时抑制",

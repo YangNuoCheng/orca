@@ -14,11 +14,17 @@ import {
 } from '../../shared/workspace-creator-visibility'
 import type { NotificationSettings } from '../../shared/notification-settings-types'
 import type { RuntimeStore } from './runtime-store-contract'
+import { hasWorkspaceNotificationParent } from '../../shared/workspace-notification-lineage'
 
 export type WorkspaceNotificationMuteDeps = {
   store: Pick<
     RuntimeStore,
-    'getUI' | 'getRepo' | 'getWorktreeMeta' | 'getAllWorktreeLineage' | 'getFolderWorkspaces'
+    | 'getUI'
+    | 'getRepo'
+    | 'getWorktreeMeta'
+    | 'getAllWorktreeLineage'
+    | 'getAllWorkspaceLineage'
+    | 'getFolderWorkspaces'
   > & { getSettings: () => { notifications?: NotificationSettings } }
   /** Last resolved Git listing, possibly stale; branch and HEAD come only from here. */
   resolvedWorktrees: readonly Worktree[] | null
@@ -29,8 +35,19 @@ export function isWorkspaceNotificationMuted(
   deps: WorkspaceNotificationMuteDeps,
   workspaceId: string
 ): boolean {
+  const notifications = deps.store.getSettings().notifications
+  if (
+    notifications?.notifyChildWorkspaces === false &&
+    hasWorkspaceNotificationParent(
+      workspaceId,
+      deps.store.getAllWorktreeLineage?.() ?? {},
+      deps.store.getAllWorkspaceLineage?.() ?? {}
+    )
+  ) {
+    return true
+  }
   return (
-    deps.store.getSettings().notifications?.notifyHiddenWorkspaces === false &&
+    notifications?.notifyHiddenWorkspaces === false &&
     isWorkspaceHiddenBySidebarFilters(deps, workspaceId)
   )
 }
